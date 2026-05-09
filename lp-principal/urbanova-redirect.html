@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acessando Comunidade | Urbanova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-border: rgba(201, 168, 76, 0.22);
+      --black: #09090b;
+      --dark1: #111113;
+      --dark2: #18181b;
+      --white: #f4f1eb;
+      --muted: rgba(244, 241, 235, 0.58);
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: "DM Sans", sans-serif;
+      background: var(--black);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .bg-grid,
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .bg-grid {
+      background-image:
+        linear-gradient(rgba(201, 168, 76, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 168, 76, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .bg-glow {
+      background: radial-gradient(ellipse 55% 55% at 50% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 72%);
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 560px);
+      background: var(--dark1);
+      border: 1px solid var(--gold-border);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-family: "Playfair Display", serif;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 28px;
+    }
+
+    .icon {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 24px;
+      border-radius: 999px;
+      border: 1px solid var(--gold-border);
+      display: grid;
+      place-items: center;
+      background: rgba(201, 168, 76, 0.08);
+      font-size: 28px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.12;
+      margin-bottom: 14px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .counter {
+      margin: 28px 0 24px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .count-num {
+      display: inline-block;
+      min-width: 20px;
+      font-weight: 700;
+    }
+
+    .steps {
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--dark2);
+      border: 1px solid transparent;
+      color: var(--muted);
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    .step-dot {
+      width: 24px;
+      flex: 0 0 24px;
+      text-align: center;
+      color: var(--gold);
+    }
+
+    .step.active,
+    .step.done {
+      border-color: var(--gold-border);
+      color: var(--white);
+    }
+
+    .step.done .step-dot {
+      color: #7ed957;
+    }
+
+    .redirect-link {
+      display: inline-block;
+      margin-top: 28px;
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <main class="card">
+    <div class="eyebrow">Urbanova | Comunidade Privada</div>
+    <div class="icon" id="lockIcon">🔒</div>
+    <h1>Preparando seu acesso ao grupo</h1>
+    <p>Estamos validando o acesso e abrindo o grupo exclusivo do WhatsApp em alguns segundos.</p>
+
+    <div class="counter">
+      Redirecionando em <span class="count-num" id="countNum">3</span>s
+    </div>
+
+    <div class="steps">
+      <div class="step active" id="step1">
+        <span class="step-dot" id="dot1">◉</span>
+        <span>Verificando acesso a comunidade</span>
+      </div>
+      <div class="step" id="step2">
+        <span class="step-dot" id="dot2">◎</span>
+        <span>Validando vaga disponivel</span>
+      </div>
+      <div class="step" id="step3">
+        <span class="step-dot" id="dot3">◎</span>
+        <span>Abrindo o grupo do WhatsApp</span>
+      </div>
+    </div>
+
+    <a class="redirect-link" href="https://chat.whatsapp.com/BjwdLVJc32p7z823kCMHVz?mode=gi_t">Abrir agora</a>
+  </main>
+
+  <script>
+    const WA_LINK = "https://chat.whatsapp.com/BjwdLVJc32p7z823kCMHVz?mode=gi_t";
+    const step1 = document.getElementById("step1");
+    const step2 = document.getElementById("step2");
+    const step3 = document.getElementById("step3");
+    const dot1 = document.getElementById("dot1");
+    const dot2 = document.getElementById("dot2");
+    const dot3 = document.getElementById("dot3");
+    const countNum = document.getElementById("countNum");
+    const lockIcon = document.getElementById("lockIcon");
+
+    setTimeout(function() {
+      step1.classList.remove("active");
+      step1.classList.add("done");
+      dot1.textContent = "✓";
+      step2.classList.add("active");
+      countNum.textContent = "2";
+    }, 1000);
+
+    setTimeout(function() {
+      step2.classList.remove("active");
+      step2.classList.add("done");
+      dot2.textContent = "✓";
+      step3.classList.add("active");
+      countNum.textContent = "1";
+      lockIcon.textContent = "🔓";
+    }, 2000);
+
+    setTimeout(function() {
+      step3.classList.remove("active");
+      step3.classList.add("done");
+      dot3.textContent = "✓";
+      countNum.textContent = "0";
+      window.location.replace(WA_LINK);
+    }, 3000);
+  </script>
+</body>
+</html>
