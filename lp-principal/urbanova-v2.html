@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urbanova — Alerta Jurídico | São José dos Campos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8D49A;
+  --gold-pale: rgba(201,168,76,0.12);
+  --gold-border: rgba(201,168,76,0.2);
+  --black: #09090B;
+  --dark1: #111113;
+  --dark2: #18181B;
+  --dark3: #222225;
+  --white: #F4F1EB;
+  --white2: #DDD9CF;
+  --muted: rgba(244,241,235,0.55);
+  --faint: rgba(244,241,235,0.3);
+  --red: #C0392B;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ──────────────────────────────────────
+   NAV
+────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0; z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 4rem;
+  background: rgba(9,9,11,0.94);
+  border-bottom: 1px solid var(--gold-border);
+  backdrop-filter: blur(16px);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E74C3C;
+  border: 1px solid rgba(192,57,43,0.35);
+  background: rgba(192,57,43,0.08);
+  padding: 5px 14px;
+  border-radius: 3px;
+}
+
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #E74C3C;
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(0.6); }
+}
+
+/* ──────────────────────────────────────
+   HERO
+────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  padding: 11rem 4rem 6rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 75% 45%, rgba(201,168,76,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 15% 75%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+
+.hero-content { position: relative; max-width: 900px; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+}
+.eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+
+.process-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(192,57,43,0.1);
+  border: 1px solid rgba(192,57,43,0.3);
+  color: #E74C3C;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 3px;
+  margin-bottom: 2rem;
+}
+
+h1.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 1.8rem;
+}
+
+h1.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 640px;
+  margin-bottom: 1.2rem;
+  line-height: 1.8;
+}
+
+.hero-body {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--faint);
+  max-width: 580px;
+  margin-bottom: 2.8rem;
+  line-height: 1.9;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2.2rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s, transform 0.18s, box-shadow 0.25s;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.55s ease;
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(201,168,76,0.35);
+}
+.btn-primary:active { transform: translateY(-1px) scale(0.98); }
+.btn-primary .arr { transition: transform 0.22s; }
+.btn-primary:hover .arr { transform: translateX(6px); }
+
+.hero-stats {
+  display: flex;
+  gap: 3.5rem;
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--gold-border);
+}
+
+.stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  display: block;
+}
+.stat-lbl {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244,241,235,0.38);
+  margin-top: 2px;
+}
+
+/* ──────────────────────────────────────
+   TIMELINE
+────────────────────────────────────── */
+.timeline-strip {
+  background: var(--dark3);
+  padding: 3.5rem 4rem;
+  border-top: 1px solid var(--gold-border);
+  border-bottom: 1px solid var(--gold-border);
+}
+
+.strip-label {
+  font-size: 0.67rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2.5rem;
+}
+
+.tl-track {
+  display: flex;
+  position: relative;
+}
+.tl-track::before {
+  content: '';
+  position: absolute;
+  top: 13px; left: 5px; right: 0;
+  height: 1px;
+  background: var(--gold-border);
+}
+
+.tl-item { flex: 1; position: relative; padding-top: 2.2rem; }
+
+.tl-dot {
+  position: absolute;
+  top: 8px; left: 0;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--dark3);
+}
+.tl-dot.dim { background: rgba(201,168,76,0.3); }
+
+.tl-date {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.tl-item.dim .tl-date { color: rgba(244,241,235,0.25); }
+
+.tl-desc {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 88%;
+  line-height: 1.5;
+}
+.tl-item.dim .tl-desc { color: rgba(244,241,235,0.25); }
+
+/* ──────────────────────────────────────
+   SECTIONS
+────────────────────────────────────── */
+section { padding: 6rem 4rem; }
+
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.67rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.sec-label-line { width: 28px; height: 1px; background: var(--gold); }
+
+h2.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  max-width: 680px;
+  margin-bottom: 2.5rem;
+}
+
+/* ──────────────────────────────────────
+   SECTION 2 — DISCUSSÃO
+────────────────────────────────────── */
+.s2 { background: var(--dark2); }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--gold-border);
+  border: 1px solid var(--gold-border);
+  margin-top: 1rem;
+}
+
+.card {
+  background: var(--dark2);
+  padding: 1.8rem 2rem;
+  transition: background 0.2s;
+}
+.card:hover { background: var(--dark3); }
+
+.card-icon {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+
+.card-desc {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ──────────────────────────────────────
+   SECTION 3 — IMPACTO
+────────────────────────────────────── */
+.s3 { background: var(--dark1); }
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.impact-p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 1rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1.8rem;
+}
+.tag-item {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 5px 13px;
+  border-radius: 3px;
+}
+
+.zones-list { display: flex; flex-direction: column; gap: 1px; background: var(--gold-border); }
+
+.zone-row {
+  background: var(--dark2);
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+.zone-row:hover { background: var(--dark3); }
+
+.zone-name {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--white2);
+}
+.zone-status {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ──────────────────────────────────────
+   SECTION 4 — QUOTE
+────────────────────────────────────── */
+.s4 {
+  background: var(--dark2);
+  border-top: 1px solid var(--gold-border);
+  border-bottom: 1px solid var(--gold-border);
+  padding: 6rem 4rem;
+}
+
+.quote-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.quote-glyph {
+  font-family: 'Playfair Display', serif;
+  font-size: 6rem;
+  line-height: 0.4;
+  color: rgba(201,168,76,0.2);
+  display: block;
+  margin-bottom: 2.5rem;
+}
+
+.quote-text {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  color: var(--white);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.quote-attr {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ──────────────────────────────────────
+   SECTION 5 — COMUNIDADE
+────────────────────────────────────── */
+.s5 { background: var(--dark1); }
+
+.community-center {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.community-center .sec-label { justify-content: center; }
+.community-center .sec-label-line { display: none; }
+.community-center h2.sec-title { max-width: 100%; }
+
+.community-sub {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--gold-border);
+  border: 1px solid var(--gold-border);
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.benefit {
+  background: var(--dark1);
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: background 0.2s;
+}
+.benefit:hover { background: var(--dark2); }
+
+.benefit-arrow { color: var(--gold); font-size: 0.9rem; margin-top: 2px; flex-shrink: 0; }
+
+.benefit-txt {
+  font-size: 0.83rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.btn-outline {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.28s, border-color 0.28s, transform 0.18s, box-shadow 0.28s;
+}
+.btn-outline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  z-index: 0;
+}
+.btn-outline span { position: relative; z-index: 1; }
+.btn-outline:hover::after { transform: scaleX(1); }
+.btn-outline:hover {
+  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(201,168,76,0.25);
+}
+.btn-outline:active { transform: translateY(0) scale(0.98); }
+
+.btn-gold {
+  display: block;
+  width: 100%;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 1.1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s, transform 0.18s, box-shadow 0.25s;
+}
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.55s ease;
+}
+.btn-gold:hover::before { transform: translateX(100%); }
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(201,168,76,0.4);
+}
+.btn-gold:active { transform: translateY(-1px) scale(0.98); }
+
+.counter-info {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: rgba(244,241,235,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.counter-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* ──────────────────────────────────────
+   FOOTER
+────────────────────────────────────── */
+footer {
+  background: var(--dark1);
+  border-top: 1px solid var(--gold-border);
+  padding: 3rem 4rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.footer-brand {}
+.footer-logo-txt {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+.footer-proc {
+  font-size: 0.7rem;
+  color: rgba(201,168,76,0.45);
+  letter-spacing: 0.06em;
+  font-family: 'DM Sans', monospace;
+}
+
+.footer-legal {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: rgba(244,241,235,0.28);
+  line-height: 1.8;
+}
+
+/* ──────────────────────────────────────
+   FIXED BUTTON
+────────────────────────────────────── */
+.fixed-btn-wrap {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 998;
+}
+
+.fixed-wa-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #25D366;
+  color: #000;
+  border: none;
+  border-radius: 3px;
+  padding: 0.8rem 1.4rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.fixed-wa-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.fixed-wa-btn:hover::before { transform: translateX(100%); }
+.fixed-wa-btn:hover {
+  background: #1ebe5d;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(37,211,102,0.35);
+  animation: none;
+}
+.fixed-wa-btn:active { transform: translateY(-1px) scale(0.97); }
+
+/* ──────────────────────────────────────
+   RESPONSIVE
+────────────────────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .hero, section, .timeline-strip, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .cards-grid { grid-template-columns: 1fr 1fr; }
+  .impact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-stats { flex-wrap: wrap; gap: 2rem; }
+  footer { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+@media (max-width: 600px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .tl-track { flex-direction: column; gap: 2rem; }
+  .tl-track::before { display: none; }
+  .tl-item { padding-top: 0; padding-left: 1.8rem; }
+  .tl-dot { top: 4px; }
+  .hero { padding-top: 8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Urbanova · Alerta Jurídico</span>
+  <div class="nav-right">
+    <span class="live-badge"><span class="dot"></span>Processo ativo</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="eyebrow">
+      <span class="eyebrow-line"></span>
+      Zona Oeste · São José dos Campos · TJSP
+    </div>
+    <div class="process-tag">
+      <span class="dot"></span>
+      Processo 1004066-16.2026.8.26.0577
+    </div>
+    <h1 class="hero-title">
+      Empresários e investidores estão acompanhando um dos processos imobiliários mais <em>comentados</em> de São José dos Campos.
+    </h1>
+    <p class="hero-sub">
+      Uma disputa judicial envolvendo áreas estratégicas do Urbanova levantou alertas sobre segurança jurídica, cadeia dominial e possíveis impactos em aprovações imobiliárias futuras.
+    </p>
+    <p class="hero-body">
+      O processo aponta possíveis inconsistências envolvendo matrículas, georreferenciamentos e regularizações imobiliárias em áreas de expansão urbana da Zona Oeste. Enquanto o caso segue em análise judicial, empresários, investidores e moradores acompanham atentamente os desdobramentos.
+    </p>
+    <a class="btn-primary" href="urbanova-redirect.html">
+      Entrar na Comunidade e Acompanhar Atualizações
+      <span class="arr">→</span>
+    </a>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-val" id="hero-count">847</span>
+        <span class="stat-lbl">Pessoas acompanhando</span>
+      </div>
+      <div>
+        <span class="stat-val">2026</span>
+        <span class="stat-lbl">Processo em curso</span>
+      </div>
+      <div>
+        <span class="stat-val">Zona Oeste</span>
+        <span class="stat-lbl">Área impactada</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<div class="timeline-strip">
+  <div class="strip-label">Linha do tempo processual</div>
+  <div class="tl-track">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Jan 2026</div>
+      <div class="tl-desc">Protocolo da ação judicial no TJSP</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Mar 2026</div>
+      <div class="tl-desc">Análise técnica de matrículas e georreferenciamentos</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Abr 2026</div>
+      <div class="tl-desc">Pedidos de reavaliação encaminhados à Prefeitura de SJC</div>
+    </div>
+    <div class="tl-item dim">
+      <div class="tl-dot dim"></div>
+      <div class="tl-date">Em curso</div>
+      <div class="tl-desc">Decisão judicial — aguardando</div>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO 2 — DISCUSSÃO -->
+<section class="s2">
+  <div class="sec-label"><span class="sec-label-line"></span>O que está sendo discutido</div>
+  <h2 class="sec-title">Entenda o centro da discussão</h2>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">⚖️</div>
+      <div class="card-title">Origem e transferência de áreas</div>
+      <div class="card-desc">Questionamentos sobre a legitimidade na titularidade e histórico de transmissão de determinadas áreas no Urbanova.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <div class="card-title">Cancelamento de matrículas</div>
+      <div class="card-desc">Alegações de cancelamento irregular de registros imobiliários com impacto direto na segurança da cadeia dominial.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📍</div>
+      <div class="card-title">Conflitos de localização</div>
+      <div class="card-desc">Possíveis inconsistências entre localização física e titularidade jurídica dos imóveis na região de expansão.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔬</div>
+      <div class="card-title">Laudos técnicos periciais</div>
+      <div class="card-desc">Análises periciais sobre georreferenciamento e regularização fundiária nas áreas questionadas do Urbanova.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏗️</div>
+      <div class="card-title">Aprovações sob reavaliação</div>
+      <div class="card-desc">Pedidos de revisão de projetos e loteamentos futuros em áreas com possível insegurança jurídica identificada.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚠️</div>
+      <div class="card-title">Risco a novos empreendimentos</div>
+      <div class="card-desc">Riscos à aprovação de novos empreendimentos em áreas cuja cadeia dominial está sob questionamento judicial.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO 3 — IMPACTO -->
+<section class="s3">
+  <div class="sec-label"><span class="sec-label-line"></span>Por que isso importa</div>
+  <h2 class="sec-title">O impacto pode ir além do mercado imobiliário</h2>
+  <div class="impact-grid">
+    <div>
+      <p class="impact-p">A Zona Oeste de São José dos Campos concentra expansão urbana acelerada, empreendimentos de alto padrão e valorização constante — tornando-se uma das regiões de maior interesse imobiliário do Vale do Paraíba.</p>
+      <p class="impact-p">Qualquer discussão envolvendo titularidade, matrículas ou regularização fundiária nessa área gera atenção imediata dos principais agentes do mercado: construtoras, incorporadoras, investidores e compradores finais.</p>
+      <div class="tags">
+        <span class="tag-item">Titularidade</span>
+        <span class="tag-item">Matrículas</span>
+        <span class="tag-item">Georreferenciamento</span>
+        <span class="tag-item">Regularização fundiária</span>
+        <span class="tag-item">Aprovações urbanísticas</span>
+        <span class="tag-item">Cadeia dominial</span>
+      </div>
+    </div>
+    <div>
+      <div class="zones-list">
+        <div class="zone-row">
+          <span class="zone-name">Empresários e construtoras</span>
+          <span class="zone-status">Acompanhando</span>
+        </div>
+        <div class="zone-row">
+          <span class="zone-name">Investidores imobiliários</span>
+          <span class="zone-status">Em alerta</span>
+        </div>
+        <div class="zone-row">
+          <span class="zone-name">Compradores de imóveis</span>
+          <span class="zone-status">Monitorando</span>
+        </div>
+        <div class="zone-row">
+          <span class="zone-name">Moradores do Urbanova</span>
+          <span class="zone-status">Acompanhando</span>
+        </div>
+        <div class="zone-row">
+          <span class="zone-name">Incorporadoras da região</span>
+          <span class="zone-status">Atenção redobrada</span>
+        </div>
+        <div class="zone-row">
+          <span class="zone-name">Prefeitura de SJC</span>
+          <span class="zone-status">Notificada</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO 4 — CITAÇÃO -->
+<section class="s4">
+  <div class="quote-wrap">
+    <span class="quote-glyph">"</span>
+    <p class="quote-text">
+      O Município deve agir com rigor técnico e atenção redobrada na análise de projetos e documentos relacionados às áreas discutidas.
+    </p>
+    <div class="quote-attr">Extraído do processo judicial · 1004066-16.2026.8.26.0577 · TJSP</div>
+  </div>
+</section>
+
+<!-- SEÇÃO 5 — COMUNIDADE -->
+<section class="s5" id="comunidade">
+  <div class="community-center">
+    <div class="sec-label"><span class="sec-label-line"></span>Acesso privado</div>
+    <h2 class="sec-title">Entre para a comunidade privada</h2>
+    <p class="community-sub">
+      Estamos reunindo empresários, investidores e moradores interessados em acompanhar os desdobramentos com transparência, análise técnica e profundidade.
+    </p>
+    <div class="benefits-grid">
+      <div class="benefit">
+        <span class="benefit-arrow">→</span>
+        <span class="benefit-txt">Movimentações do processo em tempo real</span>
+      </div>
+      <div class="benefit">
+        <span class="benefit-arrow">→</span>
+        <span class="benefit-txt">Impactos urbanísticos analisados</span>
+      </div>
+      <div class="benefit">
+        <span class="benefit-arrow">→</span>
+        <span class="benefit-txt">Novas decisões judiciais</span>
+      </div>
+      <div class="benefit">
+        <span class="benefit-arrow">→</span>
+        <span class="benefit-txt">Atualizações técnicas periciais</span>
+      </div>
+      <div class="benefit">
+        <span class="benefit-arrow">→</span>
+        <span class="benefit-txt">Documentos públicos e análises</span>
+      </div>
+      <div class="benefit">
+        <span class="benefit-arrow">→</span>
+        <span class="benefit-txt">Repercussões no mercado local</span>
+      </div>
+    </div>
+    <button class="btn-outline" onclick="window.location.href='urbanova-redirect.html'">
+      <span>💬 Comunidade Exclusiva do WhatsApp</span>
+    </button>
+    <button class="btn-gold" onclick="window.location.href='urbanova-redirect.html'">
+      <span>🔔 Entrar na Comunidade Agora</span>
+    </button>
+    <div class="counter-info">
+      <span class="counter-num" id="comm-count">847</span>
+      pessoas já fazem parte da comunidade
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="footer-logo-txt">Urbanova · Alerta Jurídico</span>
+    <span class="footer-proc">Processo: 1004066-16.2026.8.26.0577</span>
+    <span class="footer-proc">TJSP · Vara Cível de São José dos Campos</span>
+  </div>
+  <div class="footer-legal">
+    Este conteúdo possui caráter exclusivamente informativo e foi elaborado com base em documentos públicos e movimentações processuais disponíveis. Não representa decisão judicial definitiva, nem constitui assessoria ou consultoria jurídica. Todo o material divulgado é de natureza informativa. As informações apresentadas refletem o conteúdo do processo em análise, sem juízo de valor definitivo sobre as partes envolvidas.
+  </div>
+</footer>
+
+<!-- FIXED WHATSAPP -->
+<div class="fixed-btn-wrap">
+  <button class="fixed-wa-btn" onclick="window.location.href='urbanova-redirect.html'">
+    💬 Receber Atualizações
+  </button>
+</div>
+
+<script>
+  // Contador animado
+  function animCount(el, target, duration) {
+    if (!el) return;
+    let start = target - 60;
+    let startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      let progress = Math.min((ts - startTime) / duration, 1);
+      let val = Math.round(start + (target - start) * progress);
+      el.textContent = val;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  window.addEventListener('load', function() {
+    animCount(document.getElementById('hero-count'), 847, 900);
+    animCount(document.getElementById('comm-count'), 847, 900);
+  });
+
+  // Fade-in no scroll
+  const fadeEls = document.querySelectorAll('.card, .zone-row, .benefit, .tl-item');
+  fadeEls.forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+  });
+
+  const obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  fadeEls.forEach(function(el) { obs.observe(el); });
+</script>
+</body>
+</html>
