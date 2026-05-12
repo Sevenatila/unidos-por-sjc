@@ -714,7 +714,486 @@ footer {
 /* ──────────────────────────────────────
    RESPONSIVE
 ────────────────────────────────────── */
-@media (max-width: 900px) {
+/* ──────────────────────────────────────
+   SEÇÃO VÍDEO
+────────────────────────────────────── */
+.s-video {
+  background: var(--dark2);
+  padding: 6rem 4rem;
+  border-top: 1px solid var(--gold-border);
+}
+.video-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.video-sub {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+}
+.video-wrap {
+  background: var(--dark3);
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  padding: 1.5rem;
+  position: relative;
+}
+.video-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.3), transparent 60%, rgba(201,168,76,0.1));
+  z-index: 0;
+  pointer-events: none;
+}
+.video-wrap > * { position: relative; z-index: 1; }
+
+/* ──────────────────────────────────────
+   SEÇÃO RELATOS
+────────────────────────────────────── */
+.s-relatos {
+  background: var(--dark3);
+  padding: 5rem 4rem;
+  border-top: 1px solid var(--gold-border);
+  border-bottom: 1px solid var(--gold-border);
+}
+.relatos-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+.relatos-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E8A020;
+  border: 1px solid rgba(232,160,32,0.3);
+  background: rgba(232,160,32,0.08);
+  padding: 5px 14px;
+  border-radius: 3px;
+  margin-bottom: 1.2rem;
+}
+.relatos-sub {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+.relatos-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.btn-relato {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: 1px solid rgba(232,160,32,0.5);
+  color: #E8A020;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.28s, border-color 0.28s, transform 0.18s, box-shadow 0.25s;
+}
+.btn-relato::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #E8A020;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  z-index: 0;
+}
+.btn-relato span, .btn-relato .relato-arrow { position: relative; z-index: 1; }
+.btn-relato:hover::after { transform: scaleX(1); }
+.btn-relato:hover { color: var(--black); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(232,160,32,0.25); animation: none; }
+.relato-arrow { transition: transform 0.2s; }
+.btn-relato:hover .relato-arrow { transform: translateX(5px); }
+
+/* Pulso contínuo no botão de relato */
+@keyframes relatoPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(232,160,32,0.55), 0 0 0 0 rgba(232,160,32,0.3); }
+  50%  { box-shadow: 0 0 0 10px rgba(232,160,32,0), 0 0 0 20px rgba(232,160,32,0); }
+  100% { box-shadow: 0 0 0 0 rgba(232,160,32,0), 0 0 0 0 rgba(232,160,32,0); }
+}
+.btn-relato { animation: relatoPulse 2s ease-in-out infinite; }
+.relatos-hint {
+  font-size: 0.73rem;
+  font-weight: 300;
+  color: var(--faint);
+  letter-spacing: 0.04em;
+}
+
+/* ──────────────────────────────────────
+   POPUP RELATO
+────────────────────────────────────── */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.popup-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.popup-box {
+  background: var(--dark1);
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  padding: 2.5rem 2.5rem;
+  max-width: 520px;
+  width: 100%;
+  position: relative;
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.popup-overlay.open .popup-box {
+  transform: translateY(0) scale(1);
+}
+.popup-close {
+  position: absolute;
+  top: 1.2rem; right: 1.2rem;
+  background: transparent;
+  border: 1px solid var(--gold-border);
+  color: var(--muted);
+  width: 32px; height: 32px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.popup-close:hover { background: var(--dark3); color: var(--white); }
+.popup-header { margin-bottom: 2rem; }
+.popup-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+.popup-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+.popup-desc {
+  font-size: 0.83rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.2rem; }
+.form-row { display: flex; gap: 1rem; }
+.form-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.form-input, .form-textarea {
+  background: var(--dark2);
+  border: 1px solid var(--gold-border);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  padding: 0.75rem 1rem;
+  border-radius: 3px;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--faint); }
+.anon-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+.anon-toggle input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+.anon-label {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--muted);
+  cursor: pointer;
+}
+.btn-enviar-relato {
+  width: 100%;
+  background: var(--gold);
+  border: none;
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-enviar-relato::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn-enviar-relato:hover::before { transform: translateX(100%); }
+.btn-enviar-relato:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(201,168,76,0.3); }
+.popup-success { text-align: center; padding: 1rem 0; }
+.success-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--gold-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin: 0 auto 1.2rem;
+}
+.success-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+.success-msg { font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.7; }
+
+/* ──────────────────────────────────────
+   PAINEL ADMIN (escondido)
+────────────────────────────────────── */
+.admin-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 3000;
+  display: none;
+  flex-direction: column;
+}
+.admin-overlay.open { display: flex; }
+.admin-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--dark2);
+  border-bottom: 1px solid var(--gold-border);
+}
+.admin-nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.admin-badge {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
+  padding: 4px 12px;
+  border-radius: 3px;
+}
+.admin-close-btn {
+  background: transparent;
+  border: 1px solid var(--gold-border);
+  color: var(--muted);
+  padding: 6px 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+.admin-close-btn:hover { background: var(--dark3); color: var(--white); }
+.admin-body { flex: 1; overflow-y: auto; padding: 2rem; }
+.admin-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.admin-count-line {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.admin-count-line span { color: var(--gold); font-weight: 500; }
+.relatos-list { display: flex; flex-direction: column; gap: 12px; }
+.relato-card {
+  background: var(--dark2);
+  border: 1px solid var(--gold-border);
+  border-radius: 3px;
+  padding: 1.4rem 1.6rem;
+}
+.relato-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.relato-autor {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+.relato-meta {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--faint);
+}
+.relato-texto-admin {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--white2);
+  line-height: 1.7;
+}
+.relato-contato-admin {
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--faint);
+}
+.admin-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--faint);
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+/* ──────────────────────────────────────
+   MODAL SENHA ADMIN
+────────────────────────────────────── */
+.senha-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(8px);
+  z-index: 3500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.senha-overlay.open { display: flex; }
+.senha-box {
+  background: var(--dark1);
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+}
+.senha-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.senha-sub { font-size: 0.8rem; font-weight: 300; color: var(--muted); margin-bottom: 1.5rem; }
+.senha-input {
+  width: 100%;
+  background: var(--dark2);
+  border: 1px solid var(--gold-border);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.3em;
+  padding: 0.8rem 1rem;
+  border-radius: 3px;
+  outline: none;
+  margin-bottom: 0.8rem;
+  transition: border-color 0.2s;
+}
+.senha-input:focus { border-color: var(--gold); }
+.senha-error {
+  font-size: 0.75rem;
+  color: #E74C3C;
+  margin-bottom: 0.8rem;
+  min-height: 16px;
+}
+.btn-senha {
+  width: 100%;
+  background: var(--gold);
+  border: none;
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.9rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 0.8rem;
+}
+.btn-senha:hover { background: var(--gold-light); }
+.btn-senha-cancel {
+  background: transparent;
+  border: none;
+  color: var(--faint);
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  text-decoration: underline;
+  padding: 4px;
+}
+.btn-senha-cancel:hover { color: var(--muted); }
+
+@media (max-width: 600px) {
+  .s-video, .s-relatos { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .form-row { flex-direction: column; }
+  .popup-box { padding: 2rem 1.5rem; }
+  .admin-body { padding: 1.5rem 1rem; }
+}
+
+@media (max-width: 768px) {
   nav { padding: 1rem 1.5rem; }
   .hero, section, .timeline-strip, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
   .cards-grid { grid-template-columns: 1fr 1fr; }
@@ -900,6 +1379,23 @@ footer {
   </div>
 </section>
 
+<!-- SEÇÃO VÍDEO -->
+<section class="s-video">
+  <div class="video-inner">
+    <div class="sec-label" style="justify-content:center;"><span class="sec-label-line"></span>Entenda o caso em detalhes<span class="sec-label-line"></span></div>
+    <h2 class="sec-title" style="text-align:center;max-width:100%;margin-bottom:0.6rem;">Assista antes de entrar na comunidade</h2>
+    <p class="video-sub">Um resumo completo do que está acontecendo nas áreas do Urbanova e por que isso impacta investidores e moradores.</p>
+    <div class="video-wrap">
+      <vturb-smartplayer id="vid-6a034ded40952b53b4fa7df5" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>
+      <script type="text/javascript">
+      var s=document.createElement("script");
+      s.src="https://scripts.converteai.net/a7b8ac59-18c2-4d0a-9fcc-7fa3ac0f58ae/players/6a034ded40952b53b4fa7df5/v4/player.js",
+      s.async=!0,document.head.appendChild(s);
+      </script>
+    </div>
+  </div>
+</section>
+
 <!-- SEÇÃO 4 — CITAÇÃO -->
 <section class="s4">
   <div class="quote-wrap">
@@ -958,7 +1454,63 @@ footer {
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- SEÇÃO RELATOS -->
+<section class="s-relatos">
+  <div class="relatos-inner">
+    <div class="relatos-header">
+      <div class="relatos-badge">⚠ Canal de Relatos</div>
+      <h2 class="sec-title" style="max-width:100%;margin-bottom:0.6rem;">Você tem algo a relatar?</h2>
+      <p class="relatos-sub">Se você é morador, investidor ou empresário e possui informações, vivências ou situações relacionadas ao processo ou às áreas do Urbanova, este é o seu espaço. Seu relato pode ser anônimo.</p>
+    </div>
+    <div class="relatos-cta-wrap">
+      <button class="btn-relato" id="btnAbrirRelato">
+        <span>📝 Fazer meu Relato Agora</span>
+        <span class="relato-arrow">→</span>
+      </button>
+      <p class="relatos-hint">🔒 Você pode enviar de forma anônima · Sem identificação obrigatória</p>
+    </div>
+  </div>
+</section>
+
+<!-- POPUP DE RELATO -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box" id="popupBox">
+    <button class="popup-close" id="popupClose">✕</button>
+    <div class="popup-header">
+      <div class="popup-icon">📝</div>
+      <h3 class="popup-title">Faça seu Relato</h3>
+      <p class="popup-desc">Conta para nós o que aconteceu. Seu relato será analisado pela nossa equipe. Você pode se identificar ou permanecer anônimo.</p>
+    </div>
+    <div class="popup-form" id="popupForm">
+      <div class="form-group">
+        <label class="form-label">Seu relato *</label>
+        <textarea class="form-textarea" id="relatoTexto" placeholder="Descreva o que aconteceu com o máximo de detalhes possível..." rows="5"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="flex:1">
+          <label class="form-label">Nome (opcional)</label>
+          <input class="form-input" id="relatoNome" type="text" placeholder="Seu nome ou deixe em branco">
+        </div>
+        <div class="form-group" style="flex:1">
+          <label class="form-label">Contato (opcional)</label>
+          <input class="form-input" id="relatoContato" type="text" placeholder="WhatsApp ou e-mail">
+        </div>
+      </div>
+      <div class="anon-toggle">
+        <input type="checkbox" id="anonCheck" checked>
+        <label for="anonCheck" class="anon-label">Enviar como <strong>anônimo</strong></label>
+      </div>
+      <button class="btn-enviar-relato" id="btnEnviarRelato">
+        <span>Enviar Relato</span>
+      </button>
+    </div>
+    <div class="popup-success" id="popupSuccess" style="display:none;">
+      <div class="success-icon">✓</div>
+      <h3 class="success-title">Relato recebido!</h3>
+      <p class="success-msg">Obrigado por compartilhar. Sua contribuição é importante para o acompanhamento deste processo.</p>
+    </div>
+  </div>
+</div>
 <footer>
   <div class="footer-brand">
     <span class="footer-logo-txt">Urbanova · Alerta Jurídico</span>
@@ -970,6 +1522,35 @@ footer {
   </div>
 </footer>
 
+<!-- MODAL SENHA ADMIN -->
+<div class="senha-overlay" id="senhaOverlay">
+  <div class="senha-box">
+    <div style="font-size:1.8rem;margin-bottom:1rem;">🔐</div>
+    <h3 class="senha-title">Acesso Restrito</h3>
+    <p class="senha-sub">Insira o código de acesso ao painel administrativo.</p>
+    <input class="senha-input" type="password" id="senhaInput" placeholder="••••••" maxlength="10">
+    <div class="senha-error" id="senhaError"></div>
+    <button class="btn-senha" id="btnConfirmarSenha">Acessar Painel</button>
+    <button class="btn-senha-cancel" id="btnCancelarSenha">Cancelar</button>
+  </div>
+</div>
+
+<!-- PAINEL ADMIN -->
+<div class="admin-overlay" id="adminPanel">
+  <div class="admin-nav">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span class="admin-nav-logo">Urbanova · Painel Admin</span>
+      <span class="admin-badge">🔐 Acesso Restrito</span>
+    </div>
+    <button class="admin-close-btn" id="btnFecharAdmin">✕ Fechar Painel</button>
+  </div>
+  <div class="admin-body">
+    <div class="admin-title">Relatos Recebidos</div>
+    <div class="admin-count-line">Total de relatos: <span id="adminTotalCount">0</span></div>
+    <div class="relatos-list" id="relatosList"></div>
+  </div>
+</div>
+
 <!-- FIXED WHATSAPP -->
 <div class="fixed-btn-wrap">
   <button class="fixed-wa-btn" onclick="window.location.href='urbanova-redirect.html'">
@@ -977,35 +1558,39 @@ footer {
   </button>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-  // Contador animado
+  const { createClient } = supabase;
+  const sb = createClient(
+    'https://wmldladudoahnmzueupy.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndtbGRsYWR1ZG9haG5tenVldXB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1OTY3NjMsImV4cCI6MjA5NDE3Mjc2M30.175JnN0w0cN0rjj1YdpOV0eoyFvLHfz9nwsEBfpEW8s'
+  );
+
+  // ── Contador animado ──
   function animCount(el, target, duration) {
     if (!el) return;
-    let start = target - 60;
-    let startTime = null;
+    let start = target - 60, startTime = null;
     function step(ts) {
       if (!startTime) startTime = ts;
-      let progress = Math.min((ts - startTime) / duration, 1);
-      let val = Math.round(start + (target - start) * progress);
-      el.textContent = val;
-      if (progress < 1) requestAnimationFrame(step);
+      let p = Math.min((ts - startTime) / duration, 1);
+      el.textContent = Math.round(start + (target - start) * p);
+      if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
-
   window.addEventListener('load', function() {
     animCount(document.getElementById('hero-count'), 847, 900);
     animCount(document.getElementById('comm-count'), 847, 900);
   });
 
-  // Fade-in no scroll
+  // ── Fade-in scroll ──
   const fadeEls = document.querySelectorAll('.card, .zone-row, .benefit, .tl-item');
   fadeEls.forEach(function(el) {
     el.style.opacity = '0';
     el.style.transform = 'translateY(18px)';
     el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
   });
-
   const obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
@@ -1015,8 +1600,160 @@ footer {
       }
     });
   }, { threshold: 0.08 });
-
   fadeEls.forEach(function(el) { obs.observe(el); });
+
+  // ── POPUP RELATO ──
+  var popupOverlay    = document.getElementById('popupOverlay');
+  var popupClose      = document.getElementById('popupClose');
+  var btnAbrirRelato  = document.getElementById('btnAbrirRelato');
+  var btnEnviarRelato = document.getElementById('btnEnviarRelato');
+  var popupForm       = document.getElementById('popupForm');
+  var popupSuccess    = document.getElementById('popupSuccess');
+
+  function abrirPopup() {
+    popupOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function fecharPopup() {
+    popupOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(function() {
+      popupForm.style.display = '';
+      popupSuccess.style.display = 'none';
+      document.getElementById('relatoTexto').value = '';
+      document.getElementById('relatoNome').value = '';
+      document.getElementById('relatoContato').value = '';
+      document.getElementById('anonCheck').checked = true;
+    }, 300);
+  }
+
+  btnAbrirRelato.addEventListener('click', abrirPopup);
+  popupClose.addEventListener('click', fecharPopup);
+  popupOverlay.addEventListener('click', function(e) {
+    if (e.target === popupOverlay) fecharPopup();
+  });
+
+  btnEnviarRelato.addEventListener('click', async function() {
+    var texto   = document.getElementById('relatoTexto').value.trim();
+    var nome    = document.getElementById('relatoNome').value.trim();
+    var contato = document.getElementById('relatoContato').value.trim();
+    var anonimo = document.getElementById('anonCheck').checked;
+
+    if (!texto) {
+      document.getElementById('relatoTexto').style.borderColor = '#E74C3C';
+      setTimeout(function() { document.getElementById('relatoTexto').style.borderColor = ''; }, 1500);
+      return;
+    }
+
+    btnEnviarRelato.disabled = true;
+    btnEnviarRelato.querySelector('span').textContent = 'Enviando...';
+
+    const { error } = await sb.from('relatos').insert([{
+      texto,
+      nome: anonimo ? 'Anônimo' : (nome || 'Não informado'),
+      contato: anonimo ? null : (contato || null),
+      anonimo
+    }]);
+
+    btnEnviarRelato.disabled = false;
+    btnEnviarRelato.querySelector('span').textContent = 'Enviar Relato';
+
+    if (error) {
+      alert('Erro ao enviar relato. Tente novamente.');
+      return;
+    }
+
+    popupForm.style.display = 'none';
+    popupSuccess.style.display = '';
+    setTimeout(fecharPopup, 3000);
+  });
+
+  // ── PAINEL ADMIN ──
+  var ADMIN_CODE   = '210220';
+  var senhaOverlay = document.getElementById('senhaOverlay');
+  var adminPanel   = document.getElementById('adminPanel');
+  var senhaInput   = document.getElementById('senhaInput');
+  var senhaError   = document.getElementById('senhaError');
+  var btnConfirmar = document.getElementById('btnConfirmarSenha');
+  var btnCancelar  = document.getElementById('btnCancelarSenha');
+  var btnFechar    = document.getElementById('btnFecharAdmin');
+
+  function abrirSenha() {
+    senhaOverlay.classList.add('open');
+    senhaInput.value = '';
+    senhaError.textContent = '';
+    setTimeout(function() { senhaInput.focus(); }, 100);
+  }
+  function fecharSenha() {
+    senhaOverlay.classList.remove('open');
+  }
+  async function abrirAdmin() {
+    fecharSenha();
+    adminPanel.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    await renderRelatos();
+  }
+  function fecharAdmin() {
+    adminPanel.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  async function renderRelatos() {
+    var lista = document.getElementById('relatosList');
+    var total = document.getElementById('adminTotalCount');
+    lista.innerHTML = '<div class="admin-empty">Carregando relatos...</div>';
+
+    const { data: relatos, error } = await sb.from('relatos').select('*').order('criado_em', { ascending: false });
+
+    if (error || !relatos) {
+      lista.innerHTML = '<div class="admin-empty">Erro ao carregar relatos.</div>';
+      return;
+    }
+
+    total.textContent = relatos.length;
+    if (relatos.length === 0) {
+      lista.innerHTML = '<div class="admin-empty">Nenhum relato recebido ainda.</div>';
+      return;
+    }
+    lista.innerHTML = relatos.map(function(r, i) {
+      var data = new Date(r.criado_em).toLocaleString('pt-BR');
+      return '<div class="relato-card">' +
+        '<div class="relato-card-header">' +
+          '<span class="relato-autor">' + (r.anonimo ? '🕵 Anônimo' : ('👤 ' + r.nome)) + '</span>' +
+          '<span class="relato-meta">#' + (relatos.length - i) + ' · ' + data + '</span>' +
+        '</div>' +
+        '<div class="relato-texto-admin">' + r.texto.replace(/\n/g, '<br>') + '</div>' +
+        (r.anonimo ? '' : '<div class="relato-contato-admin">📞 Contato: ' + (r.contato || '—') + '</div>') +
+      '</div>';
+    }).join('');
+  }
+
+  btnConfirmar.addEventListener('click', function() {
+    if (senhaInput.value === ADMIN_CODE) {
+      abrirAdmin();
+    } else {
+      senhaError.textContent = 'Código incorreto. Tente novamente.';
+      senhaInput.value = '';
+      senhaInput.focus();
+    }
+  });
+  senhaInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') btnConfirmar.click();
+  });
+  btnCancelar.addEventListener('click', fecharSenha);
+  btnFechar.addEventListener('click', fecharAdmin);
+
+  // ── GATILHO SECRETO: clique 5x rápido no logo do nav ──
+  var clickCount = 0, clickTimer;
+  document.querySelector('.nav-logo').addEventListener('click', function() {
+    clickCount++;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(function() { clickCount = 0; }, 1500);
+    if (clickCount >= 5) {
+      clickCount = 0;
+      abrirSenha();
+    }
+  });
 </script>
 </body>
 </html>
